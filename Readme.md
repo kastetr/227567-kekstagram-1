@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Roman Kostenko](https://up.htmlacademy.ru/javascript-individual/1/user/227567).
-* Наставник: `Неизвестно`.
+* Наставник: `Антон Попов`.
 
 ---
 
