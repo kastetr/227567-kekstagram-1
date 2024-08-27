@@ -10,8 +10,8 @@ const overlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector ('body');
 const cancelButton = document. querySelector('#upload-cancel');
 const fileField = document. querySelector('#upload-file');
-const hashtagField = document.querySelector(' text__hashtags');
-const commentField = document.querySelector(' text_description');
+const hashtagField = document.querySelector('.text__hashtags');
+const commentField = document.querySelector('.text_description');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
