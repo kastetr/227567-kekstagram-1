@@ -710,6 +710,14 @@ main {
   border-radius: 5px;
 }
 
+.img-upload__field-wrapper--error {
+  background-color: #c00;
+  color:#ffa8a8;
+  font-size: 12px;
+  margin-top: -20px;
+  z-index: 100;
+  position: relative;
+}
 
 /**
  * Кнопка для отправки изображения
@@ -1335,6 +1343,17 @@ main {
           transform: translateX(-50%);
 }
 
+.data-error {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 10px 3px;
+  font-size: 20px;
+  text-align: center;
+  background-color: #c00;
+}
 
 /* Адаптивности чуток
    ========================================================================== */
