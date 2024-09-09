@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 const getRandomInteger = (min, max) => {
   // Обмен значениями, если min больше max
   if (min > max) {
@@ -23,5 +25,15 @@ const createIdGenerator = () => {
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
-export {getRandomInteger, getRandomArrayElement, isEscapeKey};
 
+const dataErrorTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
+
+const showAlert = () => {
+  const dataErrorElement = dataErrorTemplate.cloneNode(true);
+  document.body.append(dataErrorElement);
+
+  setTimeout(() => {
+    dataErrorElement.remove();
+  }, ALERT_SHOW_TIME);
+};
+export {getRandomInteger, getRandomArrayElement, isEscapeKey, showAlert};
