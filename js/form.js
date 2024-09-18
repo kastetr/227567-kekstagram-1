@@ -4,6 +4,7 @@ import { resetEffects } from './effect.js';
 //import {sendData} from './api.js';
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const TAG_ERROR_TEXT = 'Неправильно заполнены хэштеги';
 
 const SubmitButtonText = {
@@ -19,7 +20,8 @@ const fileField = document.querySelector('#upload-file');
 const hashtagField = document.querySelector('.text__hashtags');
 const commentField = document.querySelector('.text_description');
 const submitButton = form.querySelector('.img-upload__submit');
-
+const photoPreview = form.querySelector('.img-upload__preview img');
+const effectsPreviews = form.querySelectorAll('.effects__preview');
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
@@ -46,6 +48,11 @@ const isTextFieldFocused = () =>
   document.activeElement === hashtagField ||
   document.activeElement === commentField;
 
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((it) => fileName.endsWith(it));
+};
+
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape' && !isTextFieldFocused()) {
     evt.preventDefault();
@@ -58,6 +65,14 @@ const onCancelButtonClick = () => {
 };
 
 const onFileInputChange = () => {
+  const file = fileField.files[0];
+
+  if (file && isValidType(file)) {
+    photoPreview.src = URL.createObjectURL(file);
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreview.src}')`;
+    });
+  }
   showModal();
 };
 
