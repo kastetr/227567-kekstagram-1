@@ -1,7 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
-//import {showAlert} from './util.js';
-//import {sendData} from './api.js';
+import { isEscapeKey } from './util.js';
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
@@ -54,7 +53,7 @@ const isValidType = (file) => {
 };
 
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+  if (isEscapeKey(evt) && !isTextFieldFocused()) {
     evt.preventDefault();
     hideModal();
   }
@@ -105,36 +104,6 @@ const unblockSubmitButton = () => {
 
 pristine.addValidator(hashtagField,validateTags,TAG_ERROR_TEXT);
 
-//1
-/*
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-};
-*/
-
-
-//2
-/*const setOnFormSubmit = () => {
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const isValid = pristine.validate();
-    if (isValid) {
-      blockSubmitButton();
-      sendData(() => {
-        hideModal();
-        unblockSubmitButton();
-      }, () => {
-        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-      }, new FormData(evt.target));
-    }
-  });
-};
-*/
-
-//3
-
 const setOnFormSubmit = (callback) => {
   form.addEventListener('submit', async(evt) => {
     evt.preventDefault();
@@ -151,8 +120,5 @@ const setOnFormSubmit = (callback) => {
 
 fileField.addEventListener('change', onFileInputChange);
 cancelButton.addEventListener('click', onCancelButtonClick);
-//1
-//form.addEventListener('submit', onFormSubmit);
 
-//3
 export {setOnFormSubmit, hideModal};
