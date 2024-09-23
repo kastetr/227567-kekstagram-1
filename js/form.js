@@ -12,12 +12,12 @@ const SubmitButtonText = {
 };
 
 const form = document.querySelector('.img-upload__form');
-const overlay = document.querySelector('.img-upload__overlay');
+const overlay = form.querySelector('.img-upload__overlay');
 const body = document.querySelector ('body');
-const cancelButton = document.querySelector('#upload-cancel');
-const fileField = document.querySelector('#upload-file');
-const hashtagField = document.querySelector('.text__hashtags');
-const commentField = document.querySelector('.text_description');
+const cancelButton = form.querySelector('#upload-cancel');
+const fileField = form.querySelector('#upload-file');
+const hashtagField = form.querySelector('.text__hashtags');
+const commentField = form.querySelector('.text_description');
 const submitButton = form.querySelector('.img-upload__submit');
 const photoPreview = form.querySelector('.img-upload__preview img');
 const effectsPreviews = form.querySelectorAll('.effects__preview');
