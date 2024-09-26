@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { onDocumentKeydown } from './form.js';
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
 const body = document.querySelector('body');
@@ -6,7 +7,8 @@ const body = document.querySelector('body');
 function hideMessage() {
   const messageElement = document.querySelector('.success') || document.querySelector('.error');
   messageElement.remove();
-  document.removeEventListener('click', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onMessageKeydown);
   body.removeEventListener('click', onBodyClick);
 }
 
@@ -17,7 +19,7 @@ function onBodyClick(evt) {
   hideMessage();
 }
 
-function onDocumentKeydown(evt) {
+function onMessageKeydown(evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     hideMessage();
@@ -26,7 +28,8 @@ function onDocumentKeydown(evt) {
 
 const showMessage = (messageElement, closeButtonClass) => {
   body.append(messageElement);
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onMessageKeydown);
   body.addEventListener('click', onBodyClick);
   messageElement.querySelector(closeButtonClass).addEventListener('click', hideMessage);
 };
